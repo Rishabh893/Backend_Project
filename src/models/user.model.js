@@ -32,12 +32,12 @@ const userSchema=new schema({
         required:true,
 
     },
-    coverimage:{
+    coverImage:{
         type:String
 
     },
     watchhistory:[
-        {type:Schema.Types.ObjectId,
+        {type:schema.Types.ObjectId,
         ref:"Video"
         }
     ],
@@ -55,7 +55,7 @@ const userSchema=new schema({
 
 userSchema.pre("save",async function(next){
     if(!this.isModified("password")) return next()
-    this.password=bcrypt.hash(this.password,10)
+    this.password= await bcrypt.hash(this.password,10)
     next()
 })
 
